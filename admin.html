@@ -9,11 +9,11 @@
 </head><body>
 <header class="head"><div class="wrap"><h1>Shiv Shakti — Admin Panel</h1><div class="muted" style="color:#d1d5db">ਡਿਜ਼ਾਈਨ ਅਤੇ ਆਰਡਰ ਮੈਨੇਜਮੈਂਟ</div></div></header>
 <main class="wrap">
-<section class="panel"><h2>ਪਹਿਲੀ ਵਾਰ ਸੈੱਟਅੱਪ</h2><p class="muted">ਇਹ ਪੈਨਲ ਚਲਾਉਣ ਲਈ Supabase Project URL ਅਤੇ Publishable key ਭਰੋ। ਇਹ ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਹੀ ਰਹਿਣਗੇ; Secret/service_role key ਕਦੇ ਨਾ ਪਾਓ।</p>
-<label for="url">Supabase Project URL</label><input id="url" placeholder="https://your-project-id.supabase.co">
-<label for="key">Supabase Publishable key (sb_publishable_...)</label><input id="key" placeholder="sb_publishable_..." autocomplete="off">
+<section class="panel"><h2>Supabase ਕਨੈਕਸ਼ਨ</h2><p class="muted">ਇਸ Admin Panel ਵਿੱਚ ਤੁਹਾਡੇ ਪ੍ਰੋਜੈਕਟ ਦੀ ਕਨੈਕਸ਼ਨ ਜਾਣਕਾਰੀ ਪਹਿਲਾਂ ਹੀ ਸੈੱਟ ਹੈ। ਇੱਥੇ ਕੋਈ URL ਜਾਂ key ਭਰਨ ਦੀ ਲੋੜ ਨਹੀਂ। Secret/service_role key ਕਦੇ ਨਾ ਪਾਓ।</p>
+<input id="url" type="hidden" value="https://lzkqmvimvqiibtgqufcz.supabase.co">
+<input id="key" type="hidden" value="sb_publishable_lYLox6a3lJKrNK_rOqdYiw_jVn8IhCk">
 <button id="connect">Connect</button> <button id="logout" class="secondary hidden">Log out</button>
-<div id="status" class="status" style="margin-top:12px">ਹਾਲੇ Supabase ਨਾਲ ਕਨੈਕਟ ਨਹੀਂ ਹੋਇਆ।</div></section>
+<div id="status" class="status" style="margin-top:12px">ਤਿਆਰ ਹੈ। Connect ਦਬਾਓ, ਫਿਰ Admin Login ਕਰੋ।</div></section>
 <section id="loginPanel" class="panel hidden"><h2>Admin Login</h2><form id="loginForm"><label for="email">Admin email</label><input id="email" type="email" required autocomplete="username"><label for="password">Password</label><input id="password" type="password" required autocomplete="current-password"><button type="submit">Login</button></form><p class="muted">ਉਹੀ Supabase Auth email/password ਵਰਤੋ ਜੋ ਤੁਸੀਂ ਬਣਾਇਆ ਸੀ।</p></section>
 <section id="dashboard" class="hidden">
 <div class="grid"><section class="panel"><h2>ਡਿਜ਼ਾਈਨ ਜੋੜੋ</h2><form id="designForm"><label for="title">ਡਿਜ਼ਾਈਨ ਦਾ ਨਾਮ</label><input id="title" required maxlength="120"><label for="category">Category</label><select id="category" style="width:100%;padding:11px;border-radius:8px;margin:5px 0 12px;border:1px solid #cbd0d8"></select><label for="rateType">ਰੇਟ ਦੀ ਕਿਸਮ</label><select id="rateType" style="width:100%;padding:11px;border-radius:8px;margin:5px 0 12px;border:1px solid #cbd0d8"><option value="quote">Price on Request</option><option value="per_sq_ft">Per sq. ft.</option><option value="per_piece">Per piece</option></select><label for="rate">ਰੇਟ (₹), ਜੇ ਪਤਾ ਹੋਵੇ</label><input id="rate" type="number" min="0" step="0.01" placeholder="ਖਾਲੀ ਛੱਡੋ ਜੇ ਪੁੱਛ ਕੇ ਦੱਸਣਾ"><label for="imageFile">Wallpaper ਦੀ ਫੋਟੋ ਚੁਣੋ</label><input id="imageFile" type="file" accept="image/*"><p class="muted">ਫੋਟੋ ਚੁਣਨ ਤੋਂ ਬਾਅਦ Save Design ਦਬਾਓ। ਫੋਟੋ public preview bucket ਵਿੱਚ upload ਹੋਵੇਗੀ; original CDR/PSD ਇੱਥੇ ਨਾ ਪਾਓ।</p><label for="imageUrl">Preview image URL (ਆਪਣੇ ਆਪ ਭਰੇਗਾ)</label><input id="imageUrl" type="url" placeholder="ਫੋਟੋ upload ਹੋਣ ਤੋਂ ਬਾਅਦ ਆਪਣੇ ਆਪ ਭਰੇਗਾ"><label for="description">ਵੇਰਵਾ</label><input id="description" maxlength="500"><button type="submit">Save Design</button></form></section>
