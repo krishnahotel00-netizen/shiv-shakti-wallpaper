@@ -28,8 +28,12 @@
 </div></form></div></section>
 </main>
 <footer class="footer"><div class="wrap"><strong>Shiv Shakti 3D Wallpaper Nawanshahr</strong><br>ਪੰਨੂ ਮਾਜਰਾ ਰੋਡ, ਸਲੋਹ, ਨਵਾਂਸ਼ਹਿਰ, ਪੰਜਾਬ 144514<br>ਫੋਨ: <a href="tel:+917888663063">078886 63063</a></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const categories=['ਸਾਰੀਆਂ','3D Wallpaper','Flex & Banner','Floor Mat','Visiting Card','Poster & Pamphlet','Sticker & Label','Photo & Frame','Other'];
+const SUPABASE_URL='https://lzkqmvimvqiibtgqufcz.supabase.co';
+const SUPABASE_KEY='sb_publishable_lYLox6a3lJKrNK_rOqdYiw_jVn8IhCk';
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const fallbackCategories=['ਸਾਰੀਆਂ','3D Wallpaper','Flex & Banner','Floor Mat','Visiting Card','Poster & Pamphlet','Sticker & Label','Photo & Frame','Other'];
 const samples=[
 {title:'3D ਵਾਲਪੇਪਰ',cat:'3D Wallpaper',desc:'ਕਮਰੇ ਅਤੇ ਘਰ ਲਈ ਵਾਲਪੇਪਰ ਡਿਜ਼ਾਈਨ',price:'ਕੀਮਤ ਪੁੱਛੋ',icon:'🏠'},
 {title:'ਫਲੈਕਸ ਅਤੇ ਬੈਨਰ',cat:'Flex & Banner',desc:'ਦੁਕਾਨ, ਸਮਾਗਮ ਅਤੇ ਇਸ਼ਤਿਹਾਰ ਲਈ',price:'ਕੀਮਤ ਪੁੱਛੋ',icon:'🖼️'},
@@ -39,11 +43,59 @@ const samples=[
 {title:'ਸਟਿੱਕਰ ਅਤੇ ਲੇਬਲ',cat:'Sticker & Label',desc:'ਉਤਪਾਦ ਅਤੇ ਦੁਕਾਨ ਲਈ ਲੇਬਲ',price:'ਕੀਮਤ ਪੁੱਛੋ',icon:'🏷️'},
 {title:'ਫੋਟੋ ਅਤੇ ਫਰੇਮ',cat:'Photo & Frame',desc:'ਫੋਟੋ ਪ੍ਰਿੰਟ ਅਤੇ ਫਰੇਮ ਬਾਰੇ ਪੁੱਛੋ',price:'ਕੀਮਤ ਪੁੱਛੋ',icon:'🖼️'},
 {title:'ਹੋਰ ਪ੍ਰਿੰਟਿੰਗ',cat:'Other',desc:'ਆਪਣੀ ਲੋੜ ਮੁਤਾਬਕ ਪੁੱਛਗਿੱਛ ਕਰੋ',price:'ਕੀਮਤ ਪੁੱਛੋ',icon:'✨'}];
-let active='ਸਾਰੀਆਂ';
+let active='ਸਾਰੀਆਂ', categories=[...fallbackCategories], designs=[];
 const filters=document.getElementById('filters'),cards=document.getElementById('cards'),select=document.getElementById('design');
+function buildFilters(){
+filters.innerHTML='';
 categories.forEach(c=>{const b=document.createElement('button');b.className='chip'+(c===active?' active':'');b.textContent=c;b.onclick=()=>{active=c;render()};filters.appendChild(b)});
-function render(){filters.querySelectorAll('.chip').forEach(b=>b.classList.toggle('active',b.textContent===active));cards.innerHTML='';samples.filter(x=>active==='ਸਾਰੀਆਂ'||x.cat===active).forEach(x=>{const a=document.createElement('article');a.className='card';a.innerHTML='<div class="visual" aria-hidden="true">'+x.icon+'</div><div class="cardbody"><h3></h3><p></p><div class="price"></div><button class="btn" type="button">ਇਸ ਬਾਰੇ ਪੁੱਛੋ</button></div>';a.querySelector('h3').textContent=x.title;a.querySelector('p').textContent=x.desc;a.querySelector('.price').textContent=x.price;a.querySelector('button').onclick=()=>{select.value=x.title;document.getElementById('order').scrollIntoView({behavior:'smooth'})};cards.appendChild(a)});}
-samples.forEach(x=>{const o=document.createElement('option');o.value=x.title;o.textContent=x.title;select.appendChild(o)});render();
-document.getElementById('orderForm').addEventListener('submit',e=>{e.preventDefault();const v=id=>document.getElementById(id).value.trim();const msg=['ਨਵੀਂ ਆਰਡਰ ਪੁੱਛਗਿੱਛ — Shiv Shakti 3D Wallpaper', 'ਡਿਜ਼ਾਈਨ/ਸੇਵਾ: '+v('design'),'ਨਾਮ: '+v('name'),'ਮੋਬਾਈਲ: '+v('phone'),'ਲੰਬਾਈ (ਫੁੱਟ): '+(v('length')||'ਲਾਗੂ ਨਹੀਂ'),'ਚੌੜਾਈ (ਫੁੱਟ): '+(v('width')||'ਲਾਗੂ ਨਹੀਂ'),'ਮਾਤਰਾ: '+v('qty'),'ਪ੍ਰਾਪਤੀ: '+v('delivery'),'ਹੋਰ ਵੇਰਵਾ: '+(v('notes')||'ਕੋਈ ਨਹੀਂ')].join('\n');window.open('https://wa.me/917888663063?text='+encodeURIComponent(msg),'_blank','noopener,noreferrer')});
+}
+function priceLabel(d){
+if(d.rate==null || d.pricing_type==='quote') return 'ਕੀਮਤ ਪੁੱਛੋ';
+return '₹'+d.rate+(d.pricing_type==='per_sq_ft'?' / ਵਰਗ ਫੁੱਟ':d.pricing_type==='per_piece'?' / ਪੀਸ':'');
+}
+function render(){
+buildFilters();
+cards.innerHTML='';
+const list=designs.length?designs.filter(d=>active==='ਸਾਰੀਆਂ'||d.categoryName===active):samples.filter(x=>active==='ਸਾਰੀਆਂ'||x.cat===active);
+if(!list.length){
+const msg=document.createElement('p');msg.className='sub';msg.textContent=designs.length?'ਇਸ ਕੈਟੇਗਰੀ ਵਿੱਚ ਹਾਲੇ ਕੋਈ ਮਨਜ਼ੂਰ ਡਿਜ਼ਾਈਨ ਨਹੀਂ।':'ਹਾਲੇ ਮਨਜ਼ੂਰ ਕੀਤੇ ਡਿਜ਼ਾਈਨ ਨਹੀਂ ਮਿਲੇ।';cards.appendChild(msg);return;
+}
+list.forEach(x=>{
+const a=document.createElement('article');a.className='card';
+const visual=document.createElement('div');visual.className='visual';
+if(x.preview_image_url){
+const img=document.createElement('img');img.src=x.preview_image_url;img.alt=x.title||'Wallpaper design';img.loading='lazy';img.style.width='100%';img.style.height='100%';img.style.objectFit='cover';img.onerror=()=>{visual.textContent='ਫੋਟੋ ਲੋਡ ਨਹੀਂ ਹੋਈ'};visual.appendChild(img);
+}else{visual.textContent=x.icon||'🖼️'}
+const body=document.createElement('div');body.className='cardbody';
+const h=document.createElement('h3');h.textContent=x.title;
+const p=document.createElement('p');p.textContent=x.description||x.desc||x.categoryName||'ਡਿਜ਼ਾਈਨ ਬਾਰੇ ਹੋਰ ਜਾਣਕਾਰੀ ਲਈ ਪੁੱਛੋ';
+const price=document.createElement('div');price.className='price';price.textContent=x.id?priceLabel(x):(x.price||'ਕੀਮਤ ਪੁੱਛੋ');
+const btn=document.createElement('button');btn.className='btn';btn.type='button';btn.textContent='ਇਸ ਬਾਰੇ ਪੁੱਛੋ';btn.onclick=()=>{let found=[...select.options].find(o=>o.value===x.title);if(!found){const o=document.createElement('option');o.value=x.title;o.textContent=x.title;select.appendChild(o)}select.value=x.title;document.getElementById('order').scrollIntoView({behavior:'smooth'})};
+body.append(h,p,price,btn);a.append(visual,body);cards.appendChild(a);
+});
+}
+function updateOrderOptions(){
+select.innerHTML='<option value="">ਚੁਣੋ</option>';
+const list=designs.length?designs:samples;
+list.forEach(x=>{const o=document.createElement('option');o.value=x.title;o.textContent=x.title;select.appendChild(o)});
+}
+async function loadLiveDesigns(){
+const {data,error}=await db.from('designs').select('id,title,pricing_type,rate,approved,created_at,description,preview_image_url,category_id').eq('approved',true).order('created_at',{ascending:false});
+if(error){cards.innerHTML='';const p=document.createElement('p');p.className='sub';p.textContent='ਡਿਜ਼ਾਈਨ ਲੋਡ ਨਹੀਂ ਹੋਏ। Supabase ਦੀ public read policy ਚੈੱਕ ਕਰੋ। ('+error.message+')';cards.appendChild(p);return;}
+const {data:cats, error:catError}=await db.from('categories').select('id,name').order('name');
+const catMap={};(cats||[]).forEach(c=>catMap[c.id]=c.name);
+designs=(data||[]).map(d=>({...d,categoryName:catMap[d.category_id]||'Other'}));
+const realCats=[...new Set(designs.map(d=>d.categoryName))];
+categories=['ਸਾਰੀਆਂ',...(realCats.length?realCats:fallbackCategories.slice(1))];
+active='ਸਾਰੀਆਂ';
+document.querySelector('.section#designs .sub').textContent=designs.length?'ਸਾਡੇ ਮਨਜ਼ੂਰ ਕੀਤੇ ਅਸਲੀ ਡਿਜ਼ਾਈਨ ਵੇਖੋ ਅਤੇ ਆਰਡਰ ਦੀ ਪੁੱਛਗਿੱਛ ਭੇਜੋ।':'ਹਾਲੇ ਕੋਈ ਡਿਜ਼ਾਈਨ ਮਨਜ਼ੂਰ ਨਹੀਂ ਕੀਤਾ ਗਿਆ। Admin Panel ਵਿੱਚ ਡਿਜ਼ਾਈਨ Approve ਕਰੋ।';
+updateOrderOptions();render();
+}
+document.getElementById('orderForm').addEventListener('submit',e=>{
+e.preventDefault();const v=id=>document.getElementById(id).value.trim();
+const msg=['ਨਵੀਂ ਆਰਡਰ ਪੁੱਛਗਿੱਛ — Shiv Shakti 3D Wallpaper','ਡਿਜ਼ਾਈਨ/ਸੇਵਾ: '+v('design'),'ਨਾਮ: '+v('name'),'ਮੋਬਾਈਲ: '+v('phone'),'ਲੰਬਾਈ (ਫੁੱਟ): '+(v('length')||'ਲਾਗੂ ਨਹੀਂ'),'ਚੌੜਾਈ (ਫੁੱਟ): '+(v('width')||'ਲਾਗੂ ਨਹੀਂ'),'ਮਾਤਰਾ: '+v('qty'),'ਪ੍ਰਾਪਤੀ: '+v('delivery'),'ਹੋਰ ਵੇਰਵਾ: '+(v('notes')||'ਕੋਈ ਨਹੀਂ')].join('\n');
+window.open('https://wa.me/917888663063?text='+encodeURIComponent(msg),'_blank','noopener,noreferrer')
+});
+updateOrderOptions();render();loadLiveDesigns();
 </script>
 </body></html>
