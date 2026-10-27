@@ -70,7 +70,7 @@ const body=document.createElement('div');body.className='cardbody';
 const h=document.createElement('h3');h.textContent=x.title;
 const p=document.createElement('p');p.textContent=x.description||x.desc||x.categoryName||'ਡਿਜ਼ਾਈਨ ਬਾਰੇ ਹੋਰ ਜਾਣਕਾਰੀ ਲਈ ਪੁੱਛੋ';
 const price=document.createElement('div');price.className='price';price.textContent=x.id?priceLabel(x):(x.price||'ਕੀਮਤ ਪੁੱਛੋ');
-const btn=document.createElement('button');btn.className='btn';btn.type='button';btn.textContent='ਇਸ ਬਾਰੇ ਪੁੱਛੋ';btn.onclick=()=>{let found=[...select.options].find(o=>o.value===x.title);if(!found){const o=document.createElement('option');o.value=x.title;o.textContent=x.title;select.appendChild(o)}select.value=x.title;document.getElementById('order').scrollIntoView({behavior:'smooth'})};
+const btn=document.createElement('a');btn.className='btn';btn.href='https://wa.me/917888663063?text='+encodeURIComponent(['ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਜੀ, ਮੈਨੂੰ ਇਸ ਡਿਜ਼ਾਈਨ ਦਾ ਆਰਡਰ ਦੇਣਾ ਹੈ।','ਦੁਕਾਨ: Shiv Shakti 3D Wallpaper Nawanshahr','ਡਿਜ਼ਾਈਨ: '+(x.title||'ਡਿਜ਼ਾਈਨ'),'ਕੈਟੇਗਰੀ: '+(x.categoryName||x.cat||'ਲਾਗੂ ਨਹੀਂ'),'ਰੇਟ: '+(x.id?priceLabel(x):(x.price||'ਕੀਮਤ ਪੁੱਛੋ')),'ਕਿਰਪਾ ਕਰਕੇ ਕੀਮਤ ਅਤੇ ਆਰਡਰ ਦੀ ਜਾਣਕਾਰੀ ਦਿਓ।'].join('\\n'));btn.target='_blank';btn.rel='noopener noreferrer';btn.textContent='WhatsApp ’ਤੇ ਆਰਡਰ ਕਰੋ';
 body.append(h,p,price,btn);a.append(visual,body);cards.appendChild(a);
 });
 }
