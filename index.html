@@ -22,7 +22,7 @@
 <div><label for="phone">ਮੋਬਾਈਲ ਨੰਬਰ</label><input id="phone" required inputmode="tel" pattern="[0-9 +()-]{8,18}" placeholder="ਮੋਬਾਈਲ ਨੰਬਰ"></div>
 <div><label for="length">ਲੰਬਾਈ (ਫੁੱਟ, ਜੇ ਲਾਗੂ ਹੋਵੇ)</label><input id="length" type="number" min="0.1" step="0.1" placeholder="ਉਦਾਹਰਨ 10"></div>
 <div><label for="width">ਚੌੜਾਈ (ਫੁੱਟ, ਜੇ ਲਾਗੂ ਹੋਵੇ)</label><input id="width" type="number" min="0.1" step="0.1" placeholder="ਉਦਾਹਰਨ 8"></div>
-<div><label for="qty">ਮਾਤਰਾ</label><input id="qty" type="number" min="1" step="1" value="1" required></div>
+<div><label for="labourOption">ਮਜ਼ਦੂਰੀ ਦੀ ਚੋਣ</label><select id="labourOption"><option value="Without Labour">Without Labour (ਸਿਰਫ਼ ਮਟੀਰੀਅਲ)</option><option value="With Labour">With Labour (ਮਜ਼ਦੂਰੀ ਸਮੇਤ)</option></select></div><div><label for="qty">ਮਾਤਰਾ</label><input id="qty" type="number" min="1" step="1" value="1" required></div>
 <div><label for="delivery">ਪ੍ਰਾਪਤ ਕਰਨ ਦਾ ਤਰੀਕਾ</label><select id="delivery"><option>ਦੁਕਾਨ ਤੋਂ ਲੈਣਾ</option><option>ਡਿਲਿਵਰੀ ਬਾਰੇ ਪੁੱਛਣਾ</option></select></div>
 <div class="full"><label for="notes">ਹੋਰ ਵੇਰਵਾ</label><textarea id="notes" placeholder="ਕਾਗਜ਼/ਮਟੀਰੀਅਲ, ਰੰਗ, ਖਾਸ ਹਦਾਇਤਾਂ ਆਦਿ"></textarea></div>
 <div class="full"><button class="btn" type="submit">WhatsApp ’ਤੇ ਪੁੱਛਗਿੱਛ ਭੇਜੋ</button><p class="note">ਕੀਮਤ ਦੀ ਪੁਸ਼ਟੀ ਦੁਕਾਨ ਵੱਲੋਂ ਕੀਤੀ ਜਾਵੇਗੀ। ਜਿੱਥੇ ਰੇਟ ਤੈਅ ਨਹੀਂ, ਉੱਥੇ ਕੀਮਤ ਪੁੱਛ ਕੇ ਦੱਸੀ ਜਾਵੇਗੀ।</p></div>
@@ -59,10 +59,8 @@ function buildFilters(){
 filters.innerHTML='';
 categories.forEach(c=>{const b=document.createElement('button');b.className='chip'+(c===active?' active':'');b.textContent=c;b.onclick=()=>{active=c;render()};filters.appendChild(b)});
 }
-function priceLabel(d){
-if(d.rate==null || d.pricing_type==='quote') return 'ਕੀਮਤ ਪੁੱਛੋ';
-return '₹'+d.rate+(d.pricing_type==='per_sq_ft'?' / ਵਰਗ ਫੁੱਟ':d.pricing_type==='per_piece'?' / ਪੀਸ':'');
-}
+function onePrice(rate,d){if(rate==null||d.pricing_type==='quote')return 'ਕੀਮਤ ਪੁੱਛੋ';return '₹'+rate+(d.pricing_type==='per_sq_ft'?' / ਵਰਗ ਫੁੱਟ':d.pricing_type==='per_piece'?' / ਪੀਸ':'')}
+function priceLabel(d){return 'Without Labour: '+onePrice(d.rate,d)+' | With Labour: '+onePrice(d.labour_rate,d)}
 function render(){
 buildFilters();
 cards.innerHTML='';
@@ -80,7 +78,7 @@ const body=document.createElement('div');body.className='cardbody';
 const h=document.createElement('h3');h.textContent=x.title;
 const p=document.createElement('p');p.textContent=x.description||x.desc||x.categoryName||'ਡਿਜ਼ਾਈਨ ਬਾਰੇ ਹੋਰ ਜਾਣਕਾਰੀ ਲਈ ਪੁੱਛੋ';
 const price=document.createElement('div');price.className='price';price.textContent=x.id?priceLabel(x):(x.price||'ਕੀਮਤ ਪੁੱਛੋ');
-const btn=document.createElement('a');btn.className='btn';btn.href='https://wa.me/917888663063?text='+encodeURIComponent(['ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਜੀ, ਮੈਨੂੰ ਇਸ ਡਿਜ਼ਾਈਨ ਦਾ ਆਰਡਰ ਦੇਣਾ ਹੈ।','ਦੁਕਾਨ: Shiv Shakti 3D Wallpaper Nawanshahr','ਡਿਜ਼ਾਈਨ: '+(x.title||'ਡਿਜ਼ਾਈਨ'),'ਕੈਟੇਗਰੀ: '+(x.categoryName||x.cat||'ਲਾਗੂ ਨਹੀਂ'),'ਰੇਟ: '+(x.id?priceLabel(x):(x.price||'ਕੀਮਤ ਪੁੱਛੋ')),'ਕਿਰਪਾ ਕਰਕੇ ਕੀਮਤ ਅਤੇ ਆਰਡਰ ਦੀ ਜਾਣਕਾਰੀ ਦਿਓ।'].join('\\n'));btn.target='_blank';btn.rel='noopener noreferrer';btn.textContent='WhatsApp ’ਤੇ ਆਰਡਰ ਕਰੋ';
+const btn=document.createElement('a');btn.className='btn';btn.href='https://wa.me/917888663063?text='+encodeURIComponent(['ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਜੀ, ਮੈਨੂੰ ਇਸ ਡਿਜ਼ਾਈਨ ਦਾ ਆਰਡਰ ਦੇਣਾ ਹੈ।','ਦੁਕਾਨ: Shiv Shakti 3D Wallpaper Nawanshahr','ਡਿਜ਼ਾਈਨ: '+(x.title||'ਡਿਜ਼ਾਈਨ'),'ਕੈਟੇਗਰੀ: '+(x.categoryName||x.cat||'ਲਾਗੂ ਨਹੀਂ'),'ਚੋਣ: '+document.getElementById('labourOption').value,'ਰੇਟ: '+(x.id?onePrice(document.getElementById('labourOption').value==='With Labour'?x.labour_rate:x.rate,x):(x.price||'ਕੀਮਤ ਪੁੱਛੋ')),'ਕਿਰਪਾ ਕਰਕੇ ਕੀਮਤ ਅਤੇ ਆਰਡਰ ਦੀ ਜਾਣਕਾਰੀ ਦਿਓ।'].join('\\n'));btn.target='_blank';btn.rel='noopener noreferrer';btn.textContent='WhatsApp ’ਤੇ ਆਰਡਰ ਕਰੋ';
 body.append(h,p,price,btn);a.append(visual,body);cards.appendChild(a);
 });
 }
@@ -90,7 +88,7 @@ const list=designs.length?designs:samples;
 list.forEach(x=>{const o=document.createElement('option');o.value=x.title;o.textContent=x.title;select.appendChild(o)});
 }
 async function loadLiveDesigns(){
-const {data,error}=await db.from('designs').select('id,title,pricing_type,rate,approved,created_at,description,preview_image_url,category_id').eq('approved',true).order('created_at',{ascending:false});
+const {data,error}=await db.from('designs').select('id,title,pricing_type,rate,labour_rate,approved,created_at,description,preview_image_url,category_id').eq('approved',true).order('created_at',{ascending:false});
 if(error){cards.innerHTML='';const p=document.createElement('p');p.className='sub';p.textContent='ਡਿਜ਼ਾਈਨ ਲੋਡ ਨਹੀਂ ਹੋਏ। Supabase ਦੀ public read policy ਚੈੱਕ ਕਰੋ। ('+error.message+')';cards.appendChild(p);return;}
 const {data:cats, error:catError}=await db.from('categories').select('id,name').order('name');
 const catMap={};(cats||[]).forEach(c=>catMap[c.id]=c.name);
