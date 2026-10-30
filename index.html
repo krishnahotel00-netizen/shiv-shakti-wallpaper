@@ -95,6 +95,16 @@ body{background:linear-gradient(180deg,#fffdf8 0%,#f7f5ef 100%)}
 .service-pill:nth-child(3n+1){border-color:#f0cf82;background:linear-gradient(120deg,#d8ad5540,#ffffff0c);box-shadow:0 0 15px #d8ad5525}
 @keyframes servicesSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.services-track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}.services-group[aria-hidden=true]{display:none}}
+
+/* Festival offers highlight ribbon */
+.offer-ribbon{position:relative;overflow:hidden;padding:12px 0;background:linear-gradient(100deg,#f5d98f,#fff0c2,#d8ad55);border-bottom:1px solid #a87925;color:#17243a}
+.offer-track{display:flex;width:max-content;animation:offerSlide 28s linear infinite}
+.offer-ribbon:hover .offer-track{animation-play-state:paused}
+.offer-copy{display:flex;align-items:center;gap:14px;padding:0 22px;white-space:nowrap;font-weight:800;font-size:15px;letter-spacing:.01em}
+.offer-copy strong{color:#7b260d}
+@keyframes offerSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.offer-track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}.offer-copy[aria-hidden=true]{display:none}}
+
 </style>
 </head>
 <body>
@@ -108,6 +118,13 @@ body{background:linear-gradient(180deg,#fffdf8 0%,#f7f5ef 100%)}
   <div class="services-group" aria-hidden="true">
    <span class="service-pill"><b>✦</b> 3D ਵਾਲਪੇਪਰ</span><span class="service-pill"><b>✦</b> ਫਲੈਕਸ ਅਤੇ ਬੈਨਰ</span><span class="service-pill"><b>✦</b> ਫਲੋਰ ਮੈਟ</span><span class="service-pill"><b>✦</b> ਵਿਜ਼ਿਟਿੰਗ ਕਾਰਡ</span><span class="service-pill"><b>✦</b> ਪੋਸਟਰ ਅਤੇ ਪੈਂਫਲੈਟ</span><span class="service-pill"><b>✦</b> ਸਟਿੱਕਰ ਅਤੇ ਲੇਬਲ</span><span class="service-pill"><b>✦</b> ਫੋਟੋ ਅਤੇ ਫਰੇਮ</span><span class="service-pill"><b>✦</b> ਹੋਰ ਪ੍ਰਿੰਟਿੰਗ</span>
   </div>
+ </div>
+</div>
+
+<div class="offer-ribbon" aria-label="ਤਿਉਹਾਰਾਂ ਦੇ ਖਾਸ ਆਫ਼ਰ ਅਤੇ ਛੋਟਾਂ">
+ <div class="offer-track">
+  <div class="offer-copy"><strong>🎉 ਖਾਸ ਤਿਉਹਾਰੀ ਆਫ਼ਰ!</strong><span>ਹਰ ਤਿਉਹਾਰ ’ਤੇ ਸ਼ਾਨਦਾਰ ਛੋਟਾਂ</span><span>✦</span><span>ਨਵੇਂ ਡਿਜ਼ਾਈਨ ਅਤੇ ਖਾਸ ਡਿਸਕਾਊਂਟ</span><span>✦</span><span>ਸੀਜ਼ਨਲ ਸੇਲ ਦੀ ਜਾਣਕਾਰੀ ਲਈ ਸਾਡੇ ਨਾਲ ਜੁੜੇ ਰਹੋ</span></div>
+  <div class="offer-copy" aria-hidden="true"><strong>🎉 ਖਾਸ ਤਿਉਹਾਰੀ ਆਫ਼ਰ!</strong><span>ਹਰ ਤਿਉਹਾਰ ’ਤੇ ਸ਼ਾਨਦਾਰ ਛੋਟਾਂ</span><span>✦</span><span>ਨਵੇਂ ਡਿਜ਼ਾਈਨ ਅਤੇ ਖਾਸ ਡਿਸਕਾਊਂਟ</span><span>✦</span><span>ਸੀਜ਼ਨਲ ਸੇਲ ਦੀ ਜਾਣਕਾਰੀ ਲਈ ਸਾਡੇ ਨਾਲ ਜੁੜੇ ਰਹੋ</span></div>
  </div>
 </div>
 <main>
