@@ -69,11 +69,22 @@ body{background:linear-gradient(180deg,#fffdf8 0%,#f7f5ef 100%)}
 @keyframes shivFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
 @media(prefers-reduced-motion:reduce){.shiv-mark{animation:none}}
 
+
+/* Animated Om and playing damru in the hero header */
+.hero .wrap{z-index:2}
+.shiv-mark{z-index:1;right:7%;top:10%;font-size:clamp(130px,21vw,250px);opacity:.17;animation:omRotate 18s linear infinite,omGlow 3s ease-in-out infinite}
+.shiv-damru{position:absolute;z-index:1;left:7%;top:22%;font-size:clamp(58px,8vw,96px);line-height:1;filter:drop-shadow(0 0 14px #f0cf8270);transform-origin:50% 50%;animation:damruPlay .48s ease-in-out infinite alternate}
+@keyframes omRotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes omGlow{0%,100%{text-shadow:0 0 12px #d8ad5555}50%{text-shadow:0 0 35px #f0cf82cc}}
+@keyframes damruPlay{from{transform:rotate(-13deg) translateY(-2px)}to{transform:rotate(13deg) translateY(2px)}}
+@media(max-width:600px){.shiv-mark{right:2%;top:4%;font-size:112px;opacity:.13}.shiv-damru{left:3%;top:10%;font-size:48px;opacity:.9}.hero .wrap{z-index:2}}
+@media(prefers-reduced-motion:reduce){.shiv-mark,.shiv-damru{animation:none}}
+
 </style>
 </head>
 <body>
 <div class="top"><span>📍 ਪੰਨੂ ਮਾਜਰਾ ਰੋਡ, ਸਲੋਹ, ਨਵਾਂਸ਼ਹਿਰ, ਪੰਜਾਬ</span><a href="tel:+917888663063">📞 078886 63063</a></div>
-<header class="hero"><div class="shiv-mark" aria-hidden="true">ॐ</div><div class="wrap"><div class="eyebrow">SHIV SHAKTI • NAWANSHAHR</div><h1>ਤੁਹਾਡੇ ਘਰ ਤੇ ਕਾਰੋਬਾਰ ਲਈ<br>ਸੁੰਦਰ ਡਿਜ਼ਾਈਨ ਅਤੇ ਪ੍ਰਿੰਟਿੰਗ</h1><p>3D ਵਾਲਪੇਪਰ, ਫਲੈਕਸ, ਬੈਨਰ, ਫਲੋਰ ਮੈਟ ਅਤੇ ਹੋਰ ਡਿਜ਼ਾਈਨਾਂ ਦੀ ਝਲਕ ਵੇਖੋ। ਆਪਣਾ ਮਾਪ ਅਤੇ ਮਾਤਰਾ ਭਰ ਕੇ ਆਰਡਰ ਦੀ ਪੁੱਛਗਿੱਛ WhatsApp ਰਾਹੀਂ ਭੇਜੋ।</p><a class="btn" href="#designs">ਡਿਜ਼ਾਈਨ ਵੇਖੋ</a><a class="btn secondary" href="#order">ਆਰਡਰ ਪੁੱਛਗਿੱਛ</a></div></header>
+<header class="hero"><div class="shiv-mark" aria-hidden="true">ॐ</div><div class="shiv-damru" aria-hidden="true">🪘</div><div class="wrap"><div class="eyebrow">SHIV SHAKTI • NAWANSHAHR</div><h1>ਤੁਹਾਡੇ ਘਰ ਤੇ ਕਾਰੋਬਾਰ ਲਈ<br>ਸੁੰਦਰ ਡਿਜ਼ਾਈਨ ਅਤੇ ਪ੍ਰਿੰਟਿੰਗ</h1><p>3D ਵਾਲਪੇਪਰ, ਫਲੈਕਸ, ਬੈਨਰ, ਫਲੋਰ ਮੈਟ ਅਤੇ ਹੋਰ ਡਿਜ਼ਾਈਨਾਂ ਦੀ ਝਲਕ ਵੇਖੋ। ਆਪਣਾ ਮਾਪ ਅਤੇ ਮਾਤਰਾ ਭਰ ਕੇ ਆਰਡਰ ਦੀ ਪੁੱਛਗਿੱਛ WhatsApp ਰਾਹੀਂ ਭੇਜੋ।</p><a class="btn" href="#designs">ਡਿਜ਼ਾਈਨ ਵੇਖੋ</a><a class="btn secondary" href="#order">ਆਰਡਰ ਪੁੱਛਗਿੱਛ</a></div></header>
 <main>
 <div class="photo-modal" id="photoModal" role="dialog" aria-modal="true" aria-label="ਡਿਜ਼ਾਈਨ ਦੀ ਵੱਡੀ ਫੋਟੋ"><button type="button" class="close-photo" id="closePhoto" aria-label="ਬੰਦ ਕਰੋ">×</button><img id="largePhoto" alt="ਡਿਜ਼ਾਈਨ ਦੀ ਵੱਡੀ ਫੋਟੋ"><div class="photo-caption" id="photoCaption"></div></div>
 <section class="section" id="designs"><div class="wrap"><h2>ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਅਤੇ ਡਿਜ਼ਾਈਨ</h2><p class="sub">ਕੈਟੇਗਰੀ ਚੁਣੋ। ਇੱਥੇ ਹਾਲੇ ਨਮੂਨਾ ਕਾਰਡ ਹਨ; ਤੁਹਾਡੇ ਮਨਜ਼ੂਰ ਕੀਤੇ ਅਸਲੀ ਡਿਜ਼ਾਈਨ ਅਗਲੇ ਕਦਮ ਵਿੱਚ ਜੋੜਾਂਗੇ।</p><div class="chips" id="filters"></div><div class="grid" id="cards"></div></div></section>
