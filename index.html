@@ -47,11 +47,33 @@ html{scroll-behavior:smooth;scroll-padding-top:18px}
 @keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
 
+
+/* Premium Shiv theme: navy blue + antique gold */
+:root{--navy:#09172d;--gold:#d8ad55;--cream:#fffaf0;--shiv-gold:#f0cf82}
+body{background:linear-gradient(180deg,#fffdf8 0%,#f7f5ef 100%)}
+.top{background:linear-gradient(100deg,#071326,#142747);border-bottom:1px solid #d8ad5570}
+.hero{border-bottom:3px solid var(--gold);background:radial-gradient(ellipse at 85% 20%,#d8ad5525 0%,transparent 34%),linear-gradient(125deg,#071326 0%,#102747 58%,#172b49 100%)}
+.hero .eyebrow{color:var(--shiv-gold);letter-spacing:.16em}
+.hero .eyebrow:before{content:"🔱 ";font-size:1.15em}
+.shiv-mark{position:absolute;z-index:-1;right:8%;top:8%;font-family:serif;font-size:clamp(150px,24vw,290px);line-height:1;color:#f0cf82;opacity:.09;text-shadow:0 0 35px #d8ad55;pointer-events:none;user-select:none;animation:shivFloat 8s ease-in-out infinite}
+.hero .wrap{position:relative}
+.btn{background:linear-gradient(135deg,#f2d58e,#c99a3e);border:1px solid #f7dfa5;box-shadow:0 4px 14px #8c64251c}
+.btn.secondary{background:#fdf9ef;color:#10213b;border:1px solid #d8ad55}
+.section:nth-of-type(even){background:linear-gradient(120deg,#f5f2e9,#fffdf8)}
+.section h2:after{background:linear-gradient(90deg,#b9872e,#f3d994,#b9872e)}
+.chip.active{background:linear-gradient(120deg,#09172d,#1d3558);border-color:#d8ad55;box-shadow:inset 0 0 0 1px #d8ad5555}
+.card{border-color:#e2d5b8}
+.card:hover{border-color:#c99a3e;box-shadow:0 16px 32px #10213b20}
+.panel{border-color:#e0d1ad;box-shadow:0 8px 24px #10213b08}
+.footer{background:linear-gradient(120deg,#071326,#172b49);border-top:3px solid #d8ad55}
+@keyframes shivFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+@media(prefers-reduced-motion:reduce){.shiv-mark{animation:none}}
+
 </style>
 </head>
 <body>
 <div class="top"><span>📍 ਪੰਨੂ ਮਾਜਰਾ ਰੋਡ, ਸਲੋਹ, ਨਵਾਂਸ਼ਹਿਰ, ਪੰਜਾਬ</span><a href="tel:+917888663063">📞 078886 63063</a></div>
-<header class="hero"><div class="wrap"><div class="eyebrow">SHIV SHAKTI • NAWANSHAHR</div><h1>ਤੁਹਾਡੇ ਘਰ ਤੇ ਕਾਰੋਬਾਰ ਲਈ<br>ਸੁੰਦਰ ਡਿਜ਼ਾਈਨ ਅਤੇ ਪ੍ਰਿੰਟਿੰਗ</h1><p>3D ਵਾਲਪੇਪਰ, ਫਲੈਕਸ, ਬੈਨਰ, ਫਲੋਰ ਮੈਟ ਅਤੇ ਹੋਰ ਡਿਜ਼ਾਈਨਾਂ ਦੀ ਝਲਕ ਵੇਖੋ। ਆਪਣਾ ਮਾਪ ਅਤੇ ਮਾਤਰਾ ਭਰ ਕੇ ਆਰਡਰ ਦੀ ਪੁੱਛਗਿੱਛ WhatsApp ਰਾਹੀਂ ਭੇਜੋ।</p><a class="btn" href="#designs">ਡਿਜ਼ਾਈਨ ਵੇਖੋ</a><a class="btn secondary" href="#order">ਆਰਡਰ ਪੁੱਛਗਿੱਛ</a></div></header>
+<header class="hero"><div class="shiv-mark" aria-hidden="true">ॐ</div><div class="wrap"><div class="eyebrow">SHIV SHAKTI • NAWANSHAHR</div><h1>ਤੁਹਾਡੇ ਘਰ ਤੇ ਕਾਰੋਬਾਰ ਲਈ<br>ਸੁੰਦਰ ਡਿਜ਼ਾਈਨ ਅਤੇ ਪ੍ਰਿੰਟਿੰਗ</h1><p>3D ਵਾਲਪੇਪਰ, ਫਲੈਕਸ, ਬੈਨਰ, ਫਲੋਰ ਮੈਟ ਅਤੇ ਹੋਰ ਡਿਜ਼ਾਈਨਾਂ ਦੀ ਝਲਕ ਵੇਖੋ। ਆਪਣਾ ਮਾਪ ਅਤੇ ਮਾਤਰਾ ਭਰ ਕੇ ਆਰਡਰ ਦੀ ਪੁੱਛਗਿੱਛ WhatsApp ਰਾਹੀਂ ਭੇਜੋ।</p><a class="btn" href="#designs">ਡਿਜ਼ਾਈਨ ਵੇਖੋ</a><a class="btn secondary" href="#order">ਆਰਡਰ ਪੁੱਛਗਿੱਛ</a></div></header>
 <main>
 <div class="photo-modal" id="photoModal" role="dialog" aria-modal="true" aria-label="ਡਿਜ਼ਾਈਨ ਦੀ ਵੱਡੀ ਫੋਟੋ"><button type="button" class="close-photo" id="closePhoto" aria-label="ਬੰਦ ਕਰੋ">×</button><img id="largePhoto" alt="ਡਿਜ਼ਾਈਨ ਦੀ ਵੱਡੀ ਫੋਟੋ"><div class="photo-caption" id="photoCaption"></div></div>
 <section class="section" id="designs"><div class="wrap"><h2>ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ ਅਤੇ ਡਿਜ਼ਾਈਨ</h2><p class="sub">ਕੈਟੇਗਰੀ ਚੁਣੋ। ਇੱਥੇ ਹਾਲੇ ਨਮੂਨਾ ਕਾਰਡ ਹਨ; ਤੁਹਾਡੇ ਮਨਜ਼ੂਰ ਕੀਤੇ ਅਸਲੀ ਡਿਜ਼ਾਈਨ ਅਗਲੇ ਕਦਮ ਵਿੱਚ ਜੋੜਾਂਗੇ।</p><div class="chips" id="filters"></div><div class="grid" id="cards"></div></div></section>
